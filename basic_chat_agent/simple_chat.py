@@ -1,15 +1,7 @@
 from dotenv import load_dotenv
 import os
 from openai import OpenAI
-
-def load_keys():
-    load_dotenv(override=True)
-    openrouter_key = os.getenv('OPENROUTER_API_KEY')
-
-    if openrouter_key:
-        return True, openrouter_key
-    else:
-        return False
+from packages.environment import load_keys
 
 
 def main(question = "Why is the sky blue?", model='openai/gpt-5'):
@@ -31,5 +23,4 @@ def main(question = "Why is the sky blue?", model='openai/gpt-5'):
 if __name__ == "__main__":
     model_response  = main("Explain quantum physics, and the history of the discoveries that influenced the standard model, in simple terms")
     print(model_response)
-
 

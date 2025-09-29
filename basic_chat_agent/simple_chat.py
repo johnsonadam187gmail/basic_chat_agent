@@ -25,9 +25,11 @@ def main(question = "Why is the sky blue?", model='openai/gpt-5'):
     ],
     stream=False
 )
-        print(response.choices[0].message.content)
+        return response.choices[0].message.content
 
 
 if __name__ == "__main__":
-    main("Explain quantum physics, and the history of the discoveries that influenced the standard model, in simple terms")
+    model_response  = main("Explain quantum physics, and the history of the discoveries that influenced the standard model, in simple terms")
+    print(model_response)
+
 

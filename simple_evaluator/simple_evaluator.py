@@ -10,12 +10,8 @@ content = ["Your task is to formulate a question to test someone's general IQ. "
 "Ensure that the question is clear and concise, avoiding any ambiguity or confusion.", "Your task is to answer the question posed to you in a clear and concise manner. "
 "The answer should be well-reasoned and supported by evidence or examples where appropriate. ", "Your task is to evaluate the answers provided to the question and choose the most appropriate. You will be given a dictionary of structure Model: Answer. Return the Answer and the model name, with no other commentary or formatting"]
 
-def question_agent(question = content[0], model='openai/gpt-5'):
-    key_test, api_key = load_keys()
-    if key_test:
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
-
-        response = client.chat.completions.create(
+def question_agent(client, question = content[0], model='openai/gpt-5'):
+    response = client.chat.completions.create(
     model=model,
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
@@ -23,14 +19,10 @@ def question_agent(question = content[0], model='openai/gpt-5'):
     ],
     stream=False
 )
-        return response.choices[0].message.content
+    return response.choices[0].message.content
     
-def answer_agent1(question, model='google/gemini-2.5-flash'):
-    key_test, api_key = load_keys()
-    if key_test:
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
-
-        response = client.chat.completions.create(
+def answer_agent1(client, question, model='google/gemini-2.5-flash'):
+    response = client.chat.completions.create(
     model=model,
     messages=[
         {"role": "system", "content": f"You are a helpful assistant. {content[1]}"},
@@ -38,15 +30,11 @@ def answer_agent1(question, model='google/gemini-2.5-flash'):
     ],
     stream=False
 )
-        return response.choices[0].message.content, model
+    return response.choices[0].message.content, model
     
 
-def answer_agent2(question, model='x-ai/grok-4-fast:free'):
-    key_test, api_key = load_keys()
-    if key_test:
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
-
-        response = client.chat.completions.create(
+def answer_agent2(client, question, model='x-ai/grok-4-fast:free'):
+    response = client.chat.completions.create(
     model=model,
     messages=[
         {"role": "system", "content": f"You are a helpful assistant. {content[1]}"},
@@ -54,14 +42,10 @@ def answer_agent2(question, model='x-ai/grok-4-fast:free'):
     ],
     stream=False
 )
-        return response.choices[0].message.content, model
+    return response.choices[0].message.content, model
     
-def answer_agent3(question, model='anthropic/claude-3-5-sonnet'):
-    key_test, api_key = load_keys()
-    if key_test:
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
-
-        response = client.chat.completions.create(
+def answer_agent3(client, question, model='anthropic/claude-3-5-sonnet'):
+    response = client.chat.completions.create(
     model=model,
     messages=[
         {"role": "system", "content": f"You are a helpful assistant. {content[1]}"},
@@ -69,14 +53,10 @@ def answer_agent3(question, model='anthropic/claude-3-5-sonnet'):
     ],
     stream=False
 )
-        return response.choices[0].message.content, model
+    return response.choices[0].message.content, model
     
-def evaluation_agent(question1='why is the sky blue?', model='openai/gpt-5'):
-    key_test, api_key = load_keys()
-    if key_test:
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
-
-        response = client.chat.completions.create(
+def evaluation_agent(client, question1='why is the sky blue?', model='openai/gpt-5'):
+    response = client.chat.completions.create(
     model=model,
     messages=[
         {"role": "system", "content": f"You are a helpful assistant"},
@@ -84,16 +64,19 @@ def evaluation_agent(question1='why is the sky blue?', model='openai/gpt-5'):
     ],
     stream=False
 )
-        return response.choices[0].message.content
+    return response.choices[0].message.content
 
 def main():
+    key_test, api_key = load_keys()
+    if key_test:
+        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)   
     start_time = time.perf_counter()
-    question = question_agent()
-    answer1, model1 = answer_agent1(question)
-    # answer2, model2 = answer_agent2(question)
-    answer3, model3 = answer_agent3(question)
+    question = question_agent(client)
+    answer1, model1 = answer_agent1(client, question)
+    # answer2, model2 = answer_agent2(client, question)
+    answer3, model3 = answer_agent3(client, question)
     answers = {model1: answer1, model3: answer3}
-    final_answer = evaluation_agent(question1=answers)
+    final_answer = evaluation_agent(client, question1=answers)
     stop_time = time.perf_counter()
     timer = stop_time - start_time
     return question, final_answer, timer
@@ -108,3 +91,4 @@ if __name__ == "__main__":
     print("----TIME ELAPSED----\n")
     print(f"Time elapsed: {round(timer, 2)} seconds") 
 
+#TODO extract key test and place in main function, add api key as argument to functions

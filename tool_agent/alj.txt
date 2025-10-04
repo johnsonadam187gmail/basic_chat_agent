@@ -1,0 +1,9 @@
+My core expertise leverages a strong, four-year foundation in Senior Support Engineering and Systems Administration to excel in the complementary disciplines of Data Engineering, Solution Architecture, and AI Engineering.
+
+During my time in a high-demand consultancy environment, I gained a deep, practical understanding of complex systems, which included hands-on management and optimisation of data environments, alongside direct involvement in Business Intelligence Development (Qlik) and robust Database Administration (Snowflake). This experience gives me a unique capability: the ability to design highly resilient, available data infrastructure based on a critical understanding of operational necessity and how systems actually perform under pressure.
+
+My technical capabilities are fully validated by targeted accreditations, including the AWS AI Fundamentals/Early Adopter, Microsoft Azure Fundamentals, and the SnowPro Core certification. These qualifications confirm my current expertise in Data Warehousing, Cloud Architecture, and the application of cutting-edge disciplines like Generative AI and Machine Learning.
+
+I actively apply this blend of systems thinking, strategic Project Management, and advanced data knowledge to engineer robust, scalable data pipelines and architectural frameworks that support the next generation of AI-driven business solutions.
+
+I look forward to discussing how my proven track record in maintaining mission-critical environments, combined with this comprehensive technical skill set, can deliver significant value to your organisation’s infrastructure and data strategy.

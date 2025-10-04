@@ -1,40 +1,16 @@
 from openai import OpenAI
 from anthropic import Anthropic
-from packages.environment import load_keys
+from packages.environment import load_keys, pdf_reader, read_text_file_to_string
 from PyPDF2 import PdfReader
 import gradio as gr
 import time
 
 
-def reader(file_url):
-    text_out = ""
-    for page in PdfReader(file_url).pages:
-        text = page.extract_text()
-        if text:
-            text_out += text + "\n"
-    return text_out 
-
-def read_text_file_to_string(filepath: str) -> str:
-    try:
-        # 'r' is for read mode, 'utf-8' is a robust encoding standard
-        with open(filepath, 'r', encoding='utf-8') as f:
-            # .read() reads the entire file content as one string
-            file_content = f.read()
-            return file_content
-    except FileNotFoundError:
-        # We print the error but return an empty string to keep the function safe
-        print(f"Error: The file was not found at path: {filepath}")
-        return ""
-    except Exception as e:
-        print(f"An unexpected error occurred while reading the file: {e}")
-        return ""
-
 def main(name= "Adam Johnson", summary_file = "alj.txt", linkedin_file = "Profile.pdf"):
     key_test, api_key = load_keys()
     if key_test:
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)   
-    start_time = time.perf_counter()
-    linkedin = reader(linkedin_file)
+    linkedin = pdf_reader(linkedin_file)
     summary = read_text_file_to_string(summary_file)
 
     system_prompt = f"""You are acting as {name}. You are answering questions on {name}'s website, \
@@ -58,3 +34,6 @@ if __name__ == "__main__":
     pdf_file = "tool_agent/Profile.pdf"
     txt_file = "tool_agent/alj.txt"
     main(name="Adam Johnson", summary_file=txt_file, linkedin_file=pdf_file)
+
+
+#TODO add document personal info to add personality to chat bot

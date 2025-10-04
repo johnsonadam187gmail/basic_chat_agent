@@ -1,0 +1,25 @@
+Help shape the future of Auckland's data landscape.
+We're looking for a Solution Architect - Data Services to join a collaborative Architecture Practice and help deliver and enhance their Modern Data Platform. This is a hands-on, delivery-focused architecture role where you'll work closely with with Principal Data Architect and Agile teams to design and implement scalable, cloud-native data solutions.
+What You'll Do
+Translate data strategy into delivery alongside the Principal Data Architect
+Partner with engineers, tech leads, and Agile teams to design scalable data solutions
+Leverage Azure, Snowflake, MuleSoft, and FiveTran for data integration and pipelines
+Support BI, analytics, and data science initiatives with a robust, scalable platform
+Embed modern engineering practices including Infrastructure as Code (IaC), version control, and CI/CD pipelines
+About You
+You're a practical, delivery-minded architect or senior data engineer who thrives on turning designs into working solutions. You will bring:
+Experience as a System Architect, Solution Architect, or Senior Data Engineer in cloud data environments
+Hands-on expertise with Snowflake, MuleSoft, FiveTran, and Azure
+Strong understanding of data pipelines, APIs, cloud integration, and platform design
+Exposure to BI and analytics platforms, with the ability to enable data science capabilities
+Familiarity with modern engineering practices: IaC, versioning, CI/CD
+A collaborative mindset and ability to work in Agile or SAFe environments
+Ready to Apply?
+If you're a hands-on architect passionate about data and delivery, we'd love to hear from you. Please send your CV and cover letter and APPLY today!!
+Employer questions
+Your application will include the following questions:
+Which of the following statements best describes your right to work in New Zealand?
+How much notice are you required to give your current employer?
+What's your expected annual base salary?
+Do you have hands-on experience with Snowflake, MuleSoft, FiveTran & Azure?
+Have you experience working across large transformation projects?

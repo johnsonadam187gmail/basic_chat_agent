@@ -107,3 +107,6 @@ if __name__ == "__main__":
     print(eval)
     print(cv)
     print(f"Number of iterations: {counter}")
+
+
+#TODO adapt cv_agent prompts to include the feedback and use in the generation, also include cover letter generation and answer questions

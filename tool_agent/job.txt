@@ -1,25 +1,56 @@
-Help shape the future of Auckland's data landscape.
-We're looking for a Solution Architect - Data Services to join a collaborative Architecture Practice and help deliver and enhance their Modern Data Platform. This is a hands-on, delivery-focused architecture role where you'll work closely with with Principal Data Architect and Agile teams to design and implement scalable, cloud-native data solutions.
-What You'll Do
-Translate data strategy into delivery alongside the Principal Data Architect
-Partner with engineers, tech leads, and Agile teams to design scalable data solutions
-Leverage Azure, Snowflake, MuleSoft, and FiveTran for data integration and pipelines
-Support BI, analytics, and data science initiatives with a robust, scalable platform
-Embed modern engineering practices including Infrastructure as Code (IaC), version control, and CI/CD pipelines
-About You
-You're a practical, delivery-minded architect or senior data engineer who thrives on turning designs into working solutions. You will bring:
-Experience as a System Architect, Solution Architect, or Senior Data Engineer in cloud data environments
-Hands-on expertise with Snowflake, MuleSoft, FiveTran, and Azure
-Strong understanding of data pipelines, APIs, cloud integration, and platform design
-Exposure to BI and analytics platforms, with the ability to enable data science capabilities
-Familiarity with modern engineering practices: IaC, versioning, CI/CD
-A collaborative mindset and ability to work in Agile or SAFe environments
-Ready to Apply?
-If you're a hands-on architect passionate about data and delivery, we'd love to hear from you. Please send your CV and cover letter and APPLY today!!
-Employer questions
-Your application will include the following questions:
-Which of the following statements best describes your right to work in New Zealand?
-How much notice are you required to give your current employer?
-What's your expected annual base salary?
-Do you have hands-on experience with Snowflake, MuleSoft, FiveTran & Azure?
-Have you experience working across large transformation projects?
+AI and Analytics Engineer
+Auckland, NZ
+The Energy Collective (TEC) exists to #makeitbetter by creating and scaling digital businesses which disrupt utility retailing markets. We’re at an exciting time where traditional utilities face technology-led disruption. Customers increasingly expect brands to do good for their staff, the environment, and the local community, while simultaneously offering a seamless user experience and providing great value. Underpinning our business is a progressive purpose led culture, and a strategy that recognises exceptional technology sits at the heart of best of breed consumer facing businesses. Our current markets for retailing are New Zealand with our Hyderabad operation providing technology development and process optimisation capability to support the retail operations.
+
+The Data & AI team exists to lift business performance by making data insights and AI capabilities accessible, actionable, and integrated into how TEC operates. We're transforming TEC into a human led, agent operated business that empowers every team to make smarter decisions, work more effectively, and solve complex problems using data insights and intelligent AI agents. 
+
+Purpose of the Job
+
+Establish close working relationships and understanding of TEC's internal departments, and their data insights & AI automation needs
+Develop and manage data insights projects and AI agent solutions for each business department, to ensure they get maximum value from available data resources and AI tools
+Champion the use of data analysis, engineering, and AI development best practices to ensure maintainable, cost-efficient, scalable, trusted, high-quality data products and AI agents
+Design, build, and deploy AI agents that automate workflows and enhance decision-making across business functions
+Interrogate and interpret business data to identify insights and opportunities to leverage AI 
+Encourage and educate business users on how to use self-service data, insights tools, and AI agents
+Provide oversight and support to the engineering teams in our Hyderabad office
+Responsibilities
+
+Work closely with business stakeholders to understand data requirements, workflow pain points, and identify opportunities for AI agent automation
+Translate business requirements into technical design documentation for both data solutions and AI agent implementations
+Design and build AI agents using our AI platform (n8n, LibreChat) to automate business processes and enhance productivity
+Design and build data pipelines to ensure data is clean, reliable, and accessible for both analysis and AI agent consumption
+Develop, model and maintain datasets that power both analytical insights and AI agent functionality
+Train and support business teams to adopt and effectively use AI agents and self-service tools
+Ensure data quality, AI agent reliability, and consistency by implementing validation checks, error handling, and monitoring
+Contribute to the design of new data platform features, AI agent capabilities, and platform enhancements
+Facilitate effective interactions between business and technical teams for both data and AI initiatives
+Monitor AI agent performance and continuously optimise for better business outcomes
+Outcomes
+
+Serve as a key point of contact for data insights and AI enablement across the organisation
+Drive adoption and deployment of data analytics tools and AI agents to automate workflows and solve business problems
+Deliver actionable insights and intelligent automation solutions to decision-makers and operational teams
+Manage reporting, analytics, and AI agent development projects from conception to deployment
+Enable business teams to become self-sufficient in using data tools and AI platforms for their specific needs
+Achieve measurable improvements in decision-making speed, process efficiency, and reduction of manual work
+Embody TEC's organisational culture by fostering positive relationships and maintaining open, honest communication across all teams
+Essential attributes:
+
+3+ years experience in a data analyst, analytics engineer, data engineer, data architecture, or process automation role
+Tertiary degree in computer science, data science, information systems or similar relevant qualifications
+Strong capabilities with SQL, Python and prompt engineering
+Experience working with large databases, data warehouses or data lakes
+Ability to understand business processes and translate into both data requirements and AI automation opportunities
+Exposure to one or more BI / data visualisation platforms and experience with dimensional modelling
+Strong analytical and problem-solving skills with a keen eye for identifying trends, data anomalies, and process inefficiencies that present automation opportunities.
+Excellent communication skills with a strong ability to translate technical details for a non-technical audience, and vice versa
+Self-motivated team player who loves to work in a dynamic environment is adaptable to change and has a a passion for emerging & AI technologies
+Desirable but not essential:
+
+Experience with AI agent platforms, workflow automation tools (e.g., n8n, Zapier, Power Automate), or chatbot development
+Experience working with dimensional modelling
+Energy and/or Telco industry experience
+Exposure to AWS data services such as Glue, Athena, DMS, S3
+Experience with LLMs, MCP, AI APIs, or conversational AI platforms
+Experience working with remote / distributed teams
+Understanding of CI/CD platforms, such as GitLab

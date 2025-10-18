@@ -2,6 +2,9 @@ from pydantic import BaseModel
 from openai import OpenAI
 import time
 from packages.environment import load_keys, pdf_reader, read_text_file_to_string
+from packages.utils import markdown_to_docx
+
+
 
 
 def cv_agent(summary_file, linkedin_file, job_description, feedback, previous = '', name= "Adam Johnson"):
@@ -13,7 +16,7 @@ def cv_agent(summary_file, linkedin_file, job_description, feedback, previous = 
     cv_agent_system_prompt = f"""You are a CV producing expert. Your task is to take information about the individual, and a job description and produce a suitable cv for the job application.
     You will be provided with a summary of the individuals LinkedIn profile, a personal summary page, and the job description. 
     You will also take any feedback comments and , and previous outputs of cvs and factor them into the cv generation.
-    You will use this information to produce a cv that is tailored to the job description.
+    You will use this information to produce a cv that is tailored to the job description. You will also create a cover letter and answer any questions in the job description.
     Be professional and engaging, a produce content that is suitable and relevant to the job description. 
     Focus your content creation around keywords and phrases in the job application. Do not produce false content, but be creative in how you present the information you have.
     Provide the finished content in markdown.
@@ -107,6 +110,8 @@ if __name__ == "__main__":
     print(eval)
     print(cv)
     print(f"Number of iterations: {counter}")
+    with open("cv.md", "w", encoding="utf-8") as f:
+        f.write(cv)
+    markdown_to_docx("cv.md", "cv.docx")
 
-
-#TODO adapt cv_agent prompts to include the feedback and use in the generation, also include cover letter generation and answer questions
+    

@@ -39,7 +39,7 @@ from sql_agent.db_functions import get_db_schema, query_database
 #     """
 #     tables: List[TableSchema] = Field(..., description="A list of all tables in the database schema.")
 
-def db_structure_retrieve_agent(client, user_prompt: str) -> str:
+def db_schema_agent(client, user_prompt: str) -> str:
 
     # The tool function is defined locally here (as in your original script)
     def get_db_schema(db_file: str) -> Dict[str, List[Dict[str, Any]]]:
@@ -113,7 +113,8 @@ def db_structure_retrieve_agent(client, user_prompt: str) -> str:
                 "required": ["db_file"] 
             }
         }
-    }]
+    }
+    ]
 
     system_prompt = """You are a helpful assistant. Your task is to use the get_db_schema function tool to gather information about the database schema. 
     The database name will be provided in the user prompt. You will use the database name as the parameter 'db_file' in the get_db_schema function tool. 
@@ -151,29 +152,116 @@ def db_structure_retrieve_agent(client, user_prompt: str) -> str:
 
                 return schema
                 
-    #             # 4. Append the function result to the message history
-    #             input_list.append({
-    #                 "role": "tool", # Use 'tool' role
-    #                 "tool_call_id": tool_call.id, # Use the specific call ID
-    #                 "content": schema # The JSON string output from the function
-    #             })
+def db_query_agent(client, user_prompt) -> str:
 
-    # # --- END OF FIX ---
+    db_query_agent_prompt = """You are the SQL Execution and Results Agent, a specialized component responsible for translating natural language questions into accurate, runnable SQL queries, executing them, and returning the final data to the user. You must act as an expert database interpreter, adhering strictly to the provided database schema context.
+
+    Strict Operating Procedure (Follow these 5 steps sequentially):
+
+    Identify Target Database: Analyze the user's input to determine the name of the database being queried. If the database name is ambiguous or not explicitly mentioned, you must infer the most likely name or use a predetermined default (e.g., 'main_db').
+
+    Retrieve Schema (Tool Call): Immediately call the db_schema_agent tool, passing the database name identified in step 1. You must wait for the tool to return the complete, authoritative JSON schema structure for that database.
+
+    Generate SQL Query: Using the retrieved schema as the ONLY source of truth for table and column names, construct a single, optimized SQL query (assuming SQLite/Standard SQL dialect) that accurately answers the user's original request.
+
+    Constraint 1: Only use table and column names exactly as they appear in the schema JSON.
+
+    Constraint 2: Generate read-only queries (e.g., SELECT). Do not generate destructive commands like DROP, DELETE, or UPDATE.
+
+    Execute Query (Tool Call): Immediately call the query_database tool, passing the generated SQL query string from step 3. You must wait for the tool to return the final results string.
+
+    Final Output: Return ONLY the results string provided by the query_database tool. Do not include any explanation, conversational text, surrounding markdown blocks (e.g., ```sql), or the original query. The output must be the raw query results.
+
+    Example Schema Context provided by Tool:
+    The schema will be in the format: {"table_name": [{"name": "column_name", "type": "INTEGER/TEXT/FLOAT", ...}]}."""
+
     
-    # # 5. Second API call: The model generates the final answer
-    # # Note: Use the updated input_list (now containing the function output)
-    # response2 = client.chat.completions.create(
-    #     model="openai/gpt-5",
-    #     # NOTE: 'instructions' is non-standard. The 'messages' parameter is used instead.
-    #     # The model will rely on the initial system prompt to summarize.
-    #     messages=input_list, 
-    #     tools = tools,
-    #     tool_choice = "none", # Instructs the model to provide a text response
-    # )
+    def query_database(sql_query: str) -> str:
+        """
+        Executes a read-only SQL query against a database
+        and returns the results.
 
-    # # 6. Return the final content
-    # # This access path remains correct for the final text output
-    # return response2.choices[0].message.content
+        The database structure and context will be gathered in a previous step, by another agent/function.
+
+        Args:
+            sql_query: The complete and valid SQL query to execute. 
+                    MUST be a SELECT query. E.g., 'SELECT * FROM products WHERE category = "Electronics"'
+
+        Returns:
+            A string representation of the query results or an error message.
+        """
+        try:
+            # Connect to the database
+            conn = sqlite3.connect("test_db.db")
+            cursor = conn.cursor()
+
+            # Execute the query
+            cursor.execute(sql_query)
+            
+            # Fetch the column names (headers)
+            columns = [description[0] for description in cursor.description]
+            
+            # Fetch all results
+            results = cursor.fetchall()
+            
+            # Close the connection
+            conn.close()
+            
+            # Format the results into a readable string
+            formatted_results = f"Columns: {', '.join(columns)}\n"
+            for row in results:
+                formatted_results += f"{row}\n"
+                
+            return formatted_results
+
+        except Exception as e:
+            return f"Database Error: {e}"
+        
+    tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "query_database",
+            "description": query_database.__doc__.strip(),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "sql_query": {
+                        "type": "string",
+                        "description": "The complete and valid SQL query to execute."
+                    }
+                },
+                "required": ["sql_query"] 
+            }
+        }
+    }, 
+    {
+        "type": "function",
+        "function": {
+            "name": "db_schema_agent",
+            "description": "Retrieves the complete database schema (table names, column names, types, and constraints) for a specified database. This schema is used by the SQL Generation Agent to construct accurate SQL queries.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "user_prompt": {
+                        "type": "string",
+                        "description": "The path to the SQLite database file to inspect (e.g., 'example_database.db')."
+                    }
+                },
+                "required": ["user_prompt"]
+            }
+        }
+    }]
+
+    
+
+
+    # takes user prompt with db name
+    # uses db_schema_agent to determine db structure
+    # interprets the structure
+    # uses query database to return user results
+    pass
+
 
 
 def main():
@@ -185,7 +273,7 @@ def main():
     
     # NOTE: You must ensure 'test_db.db' exists in the script's execution directory 
     # for the get_db_schema function to succeed.
-    structure = db_structure_retrieve_agent(client, user_prompt)
+    structure = db_schema_agent(client, user_prompt)
     print(structure)
 
 
